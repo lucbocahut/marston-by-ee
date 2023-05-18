@@ -2,7 +2,9 @@ import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
 import SimpleSchema from 'simpl-schema'
 
-const create = function ({ name, email, role }) {
+// the first time the app is started, we need to create a user
+
+const firstUser = function ({ name, email, role }) {
   new SimpleSchema({
     name: { type: String },
     email: { type: String },
@@ -10,7 +12,7 @@ const create = function ({ name, email, role }) {
   }).validate({ name, email, role })
 
   // only if no user exists
-  const userInfo = Meteor.users.findOne({ "emails.address": email })
+  const userInfo = Meteor.users.findOne({})
   let userId = userInfo && userInfo._id
   if (!userInfo) {
     if (role === undefined) {
@@ -24,4 +26,4 @@ const create = function ({ name, email, role }) {
   return userId
 }
 
-export default create
+export default firstUser

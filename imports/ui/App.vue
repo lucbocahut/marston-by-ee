@@ -42,6 +42,12 @@ body {
 #EEMarstonApp {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
+  width: 100vw;
+}
+
+pre {
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .modal-card {

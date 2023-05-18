@@ -183,6 +183,7 @@ export default {
       }
       context.creating = true
       const newUser = context.newUser
+      console.log({ newUser })
       try {
         await API.Users.create(newUser)
         context.created = true

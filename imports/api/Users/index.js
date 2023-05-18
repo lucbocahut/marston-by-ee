@@ -3,6 +3,7 @@ import { check, Match } from 'meteor/check'
 import { isOperator } from '/imports/lib/auth'
 import create from '/imports/api/Users/lib/create'
 import resetPassword from '/imports/api/Users/lib/resetPassword'
+import firstUser from '/imports/api/Users/lib/firstUser'
 
 const Users = Meteor.users
 
@@ -10,11 +11,15 @@ const nameSpace = 'Users' // should be the same as the collection name
 const actions = {
   create: {
     action: create,
-    auth: isOperator
+    auth: () => true // anyone (no auth)
+  },
+  firstUser: {
+    action: firstUser,
+    auth: () => true // anyone (no auth)
   },
   resetPassword: {
     action: resetPassword,
-    auth: () => true // anyone can reset their password (no auth)
+    auth: () => true // anyone (no auth)
   }
 }
 

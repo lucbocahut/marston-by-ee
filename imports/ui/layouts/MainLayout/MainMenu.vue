@@ -1,5 +1,7 @@
 <template>
   <div id="main_nav_container">
+    <div id="main_nav_placeholder"></div>
+
     <div id="main_nav">
       <router-link to="/">
         <b-image src="/ee.png" class="main_logo" />
@@ -7,12 +9,12 @@
       <div class="start">
 
         <router-link to="/nodes">
-          <b-icon icon="rotate-orbit" />
-          <span class="text"><b>EVENTS</b></span>
+          <b-icon icon="rotate-orbit" title="nodes" />
+          <span class="text"><b>Nodes</b></span>
         </router-link>
         <router-link to="/commands">
-          <b-icon icon="circle-multiple-outline" />
-          <span class="text"><b>COMMANDS</b></span>
+          <b-icon icon="circle-multiple-outline" title="commands" />
+          <span class="text"><b>Commands</b></span>
         </router-link>
 
       </div>
@@ -25,7 +27,6 @@
 
       </div>
     </div>
-    <div id="main_nav_spacer"></div>
   </div>
 </template>
 <script>
@@ -66,30 +67,55 @@ export default {
   }
 }
 
-#main_nav_spacer {
+#main_nav_container {
+  flex: 0 0 46px;
+  height: 100vh;
   display: block;
-  position: relative;
-  content: '';
-  height: 50px;
+  transition: all 0.5s ease;
+
+  &:hover {
+    flex: 0 0 150px;
+  }
+}
+
+#main_nav_placeholder {
+  flex: 0 0 46px;
+  height: 100vh;
+  display: block;
+  transition: all 0.5s ease;
+
+  &:hover {
+    flex: 0 0 150px;
+  }
 }
 
 #main_nav {
-
   position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 50px;
-  background: #000;
-  border-bottom: 1px solid #eee;
+  width: 46px;
+  height: 100vh;
+  background: #000d;
   z-index: 10;
-  display: flex;
+  display: block;
+  transition: all 0.5s ease;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
 
-  .main_logo {
-    width: 30px;
-    margin: 13px 20px;
+  &:hover {
+    width: 150px;
+
+    .main_logo {
+      transform-origin: top left;
+      transform: scale(1.5);
+    }
   }
 
+  .main_logo {
+    transition: all 0.5s ease;
+    width: 24px;
+    margin: 18px 12px;
+  }
 
   .connected_user {
     display: inline-flex;
@@ -119,59 +145,61 @@ export default {
 
   .start,
   .end {
-    margin-left: 20px;
+    overflow: hidden;
+    margin: 10px 0 10px 0;
 
     &>a {
-      display: inline-block;
-      margin: 4px 0;
-      padding: 6px 18px;
-      height: 40px;
+      display: flex;
+      margin: 0;
+      padding: 12px;
+      height: 46px;
       text-transform: capitalize;
       font-variant: uppercase;
       position: relative;
-
       color: #999;
-      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all 0.5s ease;
+      justify-content: flex-start;
+      text-align: center;
 
       &:hover {
-        background: #333;
+        color: #ddd;
       }
 
       &.active {
-        background: #333;
-        color: #fff;
+        border-color: #ddd;
+        color: #ddd;
       }
 
       .icon {
-        padding: 5px 0 0 0;
+        padding: 0 5px 0 0;
+        height: 34px;
 
         i:before {
           position: relative;
-          top: -4px;
+          top: 0px;
         }
       }
 
       .text {
-        position: absolute;
-        bottom: 1px;
-        left: 0;
-        right: 0;
-        text-align: center;
-        font-size: 8px;
-        text-transform: uppercase;
+        display: block;
+        text-align: left;
+        text-transform: capitalize;
+        height: 30px;
+        padding: 6px 12px;
+        font-size: 16px;
       }
     }
 
     .router-link-active {
-      color: #fff;
-      background: #333;
+      color: #ddd;
+      border-color: #ddd;
     }
   }
 
   .end {
     position: absolute;
-
-    right: 5px;
+    bottom: 0px;
 
     .dark-button {
       background: #000;
